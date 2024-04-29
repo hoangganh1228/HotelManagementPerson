@@ -3,45 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TJ Hotel</title>
+    <title>TJ Hotel - HOME</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <?php require('inc/links.php')?>
     <style>
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-        }
-
-        /* Firefox */
-        input[type=number] {
-        -moz-appearance: textfield;
-        }
-
-        .custom-bg {
-            background-color: #2ec1ac;
-            border: 1px solid #2ec1ac;
-        }
-        .custom-bg:hover {
-            background-color: #279e8c;
-            border: #279e8c;
-
-        }
-
-        .availability-form {
-            margin-top: -50px;
-            z-index: 2;
-            position: relative;
-        }
-
-        /* Responsive */
-        @media screen and (max-width: 575px) {
-            .availability-form {
-                margin-top: 25px ;
-                padding: 0 25px;
-            }
-        }
-
+        
     </style>
 </head>
 <body class="bg-light">
