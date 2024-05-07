@@ -53,6 +53,11 @@ input[type=number] {
     right: 25px; 
 }
 
+#dashboard-menu {
+    position: fixed;
+    height: 100%;
+}
+
 .availability-form {
     margin-top: -50px;
     z-index: 2;
@@ -60,9 +65,13 @@ input[type=number] {
 }
 
 /* Responsive */
-@media screen and (max-width: 575px) {
-    .availability-form {
-        margin-top: 25px ;
-        padding: 0 25px;
+@media screen and (max-width: 991px) {
+    #dashboard-menu {
+        height: auto;
+        width: 100%;
+    }
+
+    #main-content {
+        margin-top: 60px;
     }
 }
