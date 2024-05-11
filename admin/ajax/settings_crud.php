@@ -37,4 +37,23 @@
         echo $res;
     }
 
+    if(isset($_POST['get_contacts']))     {
+        $q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
+        $values = [1]; //Đây là một mảng chứa các giá trị sẽ được thay thế vào các placeholder trong câu truy vấn SQL. Trong trường hợp này, mảng chỉ chứa một giá trị là 1, vì chúng ta muốn lấy dữ liệu cho sr_no có giá trị là 1.
+        $res = select($q, $values, "i"); //Tham số thứ nhất là câu truy vấn SQL, tham số thứ hai là mảng chứa các giá trị sẽ được thay thế vào câu truy vấn, và tham số thứ ba là một chuỗi chỉ định kiểu của các giá trị trong mảng. Trong trường hợp này, "i" có thể chỉ định rằng tất cả các giá trị trong mảng là kiểu integer.
+        $data = mysqli_fetch_assoc($res);
+        $json_data = json_encode($data);
+        echo $json_data;
+    }
+
+    if(isset($_POST['upd_contacts'])) {
+        $frm_data = filteration($_POST);
+
+        $q = "UPDATE `contact_details` SET `address`=?,`gmap`=?,`pn1`=?,`pn2`=?,`email`=?,`fb`=?,`insta`=?,`tw`=?,`iframe`=? WHERE `sr_no`=?";
+        
+        $values = [$frm_data['address'], $frm_data['gmap'], $frm_data['pn1'], $frm_data['pn2'], $frm_data['email'], $frm_data['fb'], $frm_data['insta'], $frm_data['tw'], $frm_data['iframe'], 1];
+        $res = update($q, $values, 'sssssssssi');
+        echo $res;
+    }
+
 ?>

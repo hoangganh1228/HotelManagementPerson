@@ -7,6 +7,7 @@
             <script> 
                 window.location.href = 'index.php';
             </script>";
+            exit;
         }
     }
 
@@ -15,8 +16,8 @@
         echo " 
             <script> 
                 window.location.href = '$url';
-            </script>
-        ";
+            </script>";
+            exit;
     }
 
     function alert($type, $msg) {
