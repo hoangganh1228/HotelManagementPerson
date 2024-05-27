@@ -183,13 +183,13 @@
                                                         <span class="input-group-text" id="basic-addon1">      
                                                             <i class="bi bi-telephone-fill"></i>
                                                         </span>
-                                                        <input type="text" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
+                                                        <input type="number" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">      
                                                             <i class="bi bi-telephone-fill"></i>
                                                         </span>
-                                                        <input type="text" name="pn2" id="pn2_inp" class="form-control shadow-none" required>
+                                                        <input type="number" name="pn2" id="pn2_inp" class="form-control shadow-none" required>
                                                     </div>
                                                 </div>    
                                                 <div class="mb-3">
@@ -228,14 +228,62 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" onclick="contacts_inp(contacts_data)"  class="btn text-secondary shadow-none" data-bs-dismiss="modal" >CANCEL</button>
-                                        <button type="submit"   class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                                        <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>  
+                
+                <!-- Management Team sections -->
+                
+                <div class="card border-0 shadow mb-4" >
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h5 class="card-title m-0">Management Team</h5>
+                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#team-s">
+                                <i class="bi bi-plus-square"></i> Add
+                            </button>
+                        </div>
+                        
+                        <div class="row" id="team-data">
+                            
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Management Team modal -->
+
+                <div class="modal fade" id="team-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form id="team_s_form">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" >Add Team Member</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label" >Name</label>
+                                        <input type="text" name="member_name" id="member_name_inp" class="form-control shadow-none" required >
+                                    </div>
+                                    <div class="col-md-12 p-0 mb-3">
+                                        <label class="form-label fw-bold">Picture</label>
+                                        <input type="file" name="member_picture" id="member_picture_inp" accept=".jpg, .png, .webp, .jpeg" class="form-control shadow-none" required >
+                                        
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="" class="btn text-secondary shadow-none" data-bs-dismiss="modal" >CANCEL</button>
+                                    <button type="submit"   class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+                
             </div>
         </div>
     </div>
@@ -250,6 +298,12 @@
         let contacts_s_form = document.getElementById('contacts_s_form');
 
 
+        let team_s_form = document.getElementById("team_s_form");
+
+        let member_name_inp = document.getElementById("member_name_inp")
+
+        let member_picture_inp = document.getElementById("member_picture_inp")
+
         function get_general() {
             let site_title = document.getElementById("site_title");
             let site_about = document.getElementById("site_about");
@@ -257,31 +311,31 @@
             let shutdown_toggle = document.getElementById('shutdown-toggle')
 
 
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "ajax/settings_crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
-            
-
-            xhr.onload = function() {
-                general_data = JSON.parse(this.responseText);
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "ajax/settings_crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
                 
-                site_title.innerText = general_data.site_title;
-                site_about.innerText = general_data.site_about;
-            
-                site_title_inp.value = general_data.site_title;
-                site_about_inp.value = general_data.site_about;
-            
-                if(general_data.shutdown == 0) {
-                    shutdown_toggle.checked = false;
-                    shutdown_toggle.value = 0;
-                } else {
-                    shutdown_toggle.checked = true;
-                    shutdown_toggle.value = 1;
+
+                xhr.onload = function() {
+                    general_data = JSON.parse(this.responseText);
+                    
+                    site_title.innerText = general_data.site_title;
+                    site_about.innerText = general_data.site_about;
+                
+                    site_title_inp.value = general_data.site_title;
+                    site_about_inp.value = general_data.site_about;
+                
+                    if(general_data.shutdown == 0) {
+                        shutdown_toggle.checked = false;
+                        shutdown_toggle.value = 0;
+                    } else {
+                        shutdown_toggle.checked = true;
+                        shutdown_toggle.value = 1;
+                    }
+
                 }
 
-            }
-
-            xhr.send('get_general');
+                xhr.send('get_general');
         }
 
         general_s_form.addEventListener('submit', function(e) {
@@ -369,6 +423,81 @@
             xhr.send('get_contacts');
         }
 
+        team_s_form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            add_member();
+        })
+
+        function add_member() {
+            let data = new FormData();
+            data.append('name', member_name_inp.value);
+            data.append('picture', member_picture_inp.files[0]);
+            data.append('add_member', '');
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/settings_crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.   
+            
+
+            xhr.onload = function() {
+                console.log(this.responseText);
+                var myModal = document.getElementById('team-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+
+                modal.hide();
+
+                if(this.responseText == 'inv_img') {
+                    alert('error', 'Only JPG and PNG images are allowed!');
+                } else if(this.responseText == 'inv_size') {
+                    alert('error', 'Image should be less than 2 MB!');
+
+                } else if(this.responseText == 'upd_failed') {
+                    alert('error', 'Image upload failed. Server Down!');
+
+                } else {
+                    alert('success', 'New member added!');
+                    member_name_inp.value='';
+                    member_picture_inp.value='';
+                    get_members();
+                }
+                
+            }
+
+            xhr.send(data);
+        }
+
+        function get_members() {
+            let xhr = new XMLHttpRequest();
+                xhr.open("POST", "ajax/settings_crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
+                
+
+                xhr.onload = function() {
+                    document.getElementById('team-data').innerHTML = this.responseText;
+                }
+
+                xhr.send('get_members');
+        }
+
+        function rem_member(val) {
+            let xhr = new XMLHttpRequest();
+                xhr.open("POST", "ajax/settings_crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
+                
+
+                xhr.onload = function() {
+                    if(this.responseText==1) {
+                        alert('success', 'Member removed!');
+                        get_members();
+                   } else {
+                    alert('error', 'Server down!')
+                   }
+                }
+
+                xhr.send('rem_member'+val);
+
+
+        }
 
         function contacts_inp(data) {
             let contacts_inp_id = ['address_inp', 'gmap_inp', 'pn1_inp', 'pn2_inp', 'email_inp', 'fb_inp', 'insta_inp', 'tw_inp', 'iframe_inp'];
@@ -420,6 +549,7 @@
         window.onload = function() {
             get_general();
             get_contacts();
+            get_members();
         }
     </script>
 </body>

@@ -17,33 +17,52 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere modi id, in exercitationem, enim cumque suscipit, nemo <br>alias consequuntur eos reiciendis! Illum provident architecto inventore dicta! Quod obcaecati quasi laborum!
         </p>
     </div>
+
+    
     
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 mb-5 px-4">
                 <div class="bg-white rounded shadow p-4 ">
-                    <iframe class="w-100 rounded mb-4" height="320" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.195675873867!2d105.79625170941975!3d20.98479198057284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acc6bdc7f95f%3A0x58ffc66343a45247!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgR2lhbyB0aMO0bmcgVuG6rW4gdOG6o2k!5e0!3m2!1svi!2s!4v1714317470076!5m2!1svi!2s" loading="lazy"></iframe>
+                    <iframe class="w-100 rounded mb-4" height="320" src="<?php echo $contact_r['iframe'] ?>" loading="lazy"></iframe>
                     <h5>Address</h5>
-                    <a href="https://maps.app.goo.gl/HACP2jWFnQc6JGTcA" target="_blank" class="d-inline-block text-decoration-none text-dark mb-2">
-                        <i class="bi bi-geo-alt-fill"></i> Trường Đại học Công nghệ Giao thông Vận tải
-                    </a>
+                    <a href="<?php echo $contact_r['gmap'] ?>" target="_blank" class="d-inline-block text-decoration-none text-dark mb-2">
+                        <i class="bi bi-geo-alt-fill"></i> <?php echo $contact_r['address'] ?>
                     <h5>Call us</h5>
-                    <a href="tel: +84123456789" class="d-inline-block mb-2 text-decoration-none text-dark"> 
-                        <i class="bi bi-telephone-fill"></i>+84123456789
+                    <a href="tel: +<?php echo $contact_r['pn1'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark"> 
+                        <i class="bi bi-telephone-fill"></i>+<?php echo $contact_r['pn1'] ?>
                     </a>
                     <br>
-                    <a href="tel: +84123456789" class="d-inline-block text-decoration-none text-dark"> 
-                        <i class="bi bi-telephone-fill"></i>+84123456789
-                    </a>
+                    <?php
+                        if($contact_r['pn2'] != '') {
+                            echo<<<data
+                            <a href="tel: + $contact_r[pn2] " class="d-inline-block text-decoration-none text-dark"> 
+                                <i class="bi bi-telephone-fill"></i>+$contact_r[pn2]
+                            </a>
+                            data;
+                        }
+                    ?>
+                    
                     <h5 class="mt-4">Email</h5>
-                    <a href="mailto: ask.tjwebdev@gmail.com" class="d-inline-block text-decoration-none text-dark">
-                        <i class="bi bi-envelope-fill"></i> ask.tjwebdev@gmail.com
+                    <a href="<?php echo $contact_r['email'] ?>" class="d-inline-block text-decoration-none text-dark">
+                        <i class="bi bi-envelope-fill"></i> <?php echo $contact_r['email'] ?>
                     </a>
                     <h5 class="mt-4 ">Follow us</h5>
-                    <a href="#" class="d-inline-block text-dark fs-5 me-2"> 
+                    <?php
+                        if($contact_r['tw'] != '') {
+                            echo<<<data
+
+                            <a href="$contact_r[tw]" class="d-inline-block mb-3d-inline-block text-dark fs-5 me-2 "> 
+                                <i class="bi bi-twitter me-1"></i> Twitter
+                            </a>
+
+                            data;
+                        }
+                    ?>
+                    <a href="<?php $contact_r['fb'] ?>" class="d-inline-block text-dark fs-5 me-2"> 
                         <i class="bi bi-twitter me-1"></i> 
                     </a>
-                    <a href="#" class="d-inline-block text-dark fs-5 me-2 "> 
+                    <a href="<?php $contact_r['insta']?>" class="d-inline-block text-dark fs-5 me-2 "> 
                         
                         <i class="bi bi-facebook me-1"></i> 
                     </a>    

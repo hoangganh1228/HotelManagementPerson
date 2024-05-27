@@ -12,12 +12,20 @@
 
     function filteration($data) {
         foreach($data as $key => $value) {
-            $data[$key] = trim($value);
-            $data[$key] = stripslashes($value);
-            $data[$key] = htmlspecialchars($value);
-            $data[$key] = strip_tags($value);
+            $value = trim($value);
+            $value = stripslashes($value);
+            $value= htmlspecialchars($value);
+            $value = strip_tags($value);
+
+            $data[$key] = $value;
         }
         return $data;
+    }
+
+    function selectAll($table) {
+        $con = $GLOBALS['con'];
+        $res = mysqli_query($con, "SELECT * FROM $table");
+        return $res;
     }
 
     function select($sql, $values, $datatypes) {
@@ -58,4 +66,22 @@
         }
     }
 
+    function insert($sql, $values, $datatypes) {
+        $con = $GLOBALS['con'];  //connect MySQL from global con variable
+        if($stmt = mysqli_prepare($con, $sql)) { //prepare SQL statements executed, return an object called 
+            mysqli_stmt_bind_param($stmt, $datatypes, ...$values); //bind values in SQL staements
+            if(mysqli_stmt_execute($stmt)) { //execute SQL statement prepared
+                $res = mysqli_stmt_affected_rows($stmt);
+                mysqli_stmt_close($stmt);
+ 
+                return $res;
+            }
+            else {
+                mysqli_stmt_close($stmt);
+                die("Query cannot be executed - Insert");
+            }
+        } else {
+            die("Query cannot be prepared - Insert");
+        }
+    }
 ?>
