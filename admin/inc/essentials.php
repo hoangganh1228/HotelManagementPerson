@@ -2,10 +2,10 @@
 
     // frontend purpose data
 
-    define('SITE_URL', 'http://127.0.0.1/hbwebsite/');
+    define('SITE_URL', 'http://127.0.0.1/HotelManagement/');
     define('ABOUT_IMG_PATH', SITE_URL.'Hotel-Booking-Website-Assets/images/about/');
 
-    // backend upload process needs this data
+    // backend upload process needs this data 
 
     define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'].'/HotelManagement/Hotel-Booking-Website-Assets/images/');
     define('ABOUT_FOLDER', 'about/');
@@ -41,7 +41,7 @@
     }
 
     function uploadImage($image, $folder) {
-        $valid_mime = ['image/jpeg', 'image/png', 'img/webp'];
+        $valid_mime = ['image/jpeg', 'image/png', 'image/webp'];
         $img_mime = $image['type'];
 
         if(!in_array($img_mime, $valid_mime)) {
@@ -62,4 +62,15 @@
 
         }
     }
+
+
+    function deleteImage($image, $folder) {
+        
+        if(unlink(UPLOAD_IMAGE_PATH.$folder.$image)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 ?>

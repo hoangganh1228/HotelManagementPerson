@@ -67,7 +67,7 @@
         }
         else if($img_r == 'inv_size') {
             echo $img_r;
-        }
+        } 
         else if($img_r == 'upd_failed') {
             echo $img_r;
         } else {
@@ -81,7 +81,7 @@
     if(isset($_POST['get_members'])) {
         $res = selectAll('team_details');
 
-        while($data = mysqli_fetch_assoc(($res))) {
+        while($row = mysqli_fetch_assoc(($res))) {
             $path = ABOUT_IMG_PATH;
             echo <<<data
 
@@ -98,6 +98,23 @@
                 </div>
 
             data;
+        }
+    }
+
+    if(isset($_POST['rem_member'])) {
+        $frm_data = filteration($_POST);
+        $values = [$frm_data['rem_member']];
+
+        $pre_q = "SELECT * FROM `team_details` WHERE `sr_no` = ?";
+        $res = select($pre_q, $values, 'i');
+        $img = mysqli_fetch_assoc($res);
+
+        if(deleteImage($img['picture'], ABOUT_FOLDER)) {
+            $q = "DELETE FROM `team_details` WHERE `sr_no` = ?";
+            $res = delete($q, $values, 'i');
+            echo $res;
+        } else {
+            echo 0;
         }
     }
 
