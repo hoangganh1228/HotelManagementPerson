@@ -203,7 +203,7 @@
         xhr.send('rem_member='+val);
 
 
-}
+    }
 
 function contacts_inp(data) {
     let contacts_inp_id = ['address_inp', 'gmap_inp', 'pn1_inp', 'pn2_inp', 'email_inp', 'fb_inp', 'insta_inp', 'tw_inp', 'iframe_inp'];
