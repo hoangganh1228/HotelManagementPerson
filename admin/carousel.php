@@ -29,12 +29,12 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Images</h5>
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#team-s">
+                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#carousel-s">
                                 <i class="bi bi-plus-square"></i> Add
                             </button>
                         </div>
                         
-                        <div class="row" id="team-data">
+                        <div class="row" id="carousel-data">
                             
                         </div>
                     </div>
@@ -42,28 +42,24 @@
 
                 <!-- Carousel modal -->
 
-                <div class="modal fade" id="team-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="carousel-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
-                        <form id="team_s_form">
+                        <form id="carousel_s_form">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" >Add Team Member</h5>
+                                    <h5 class="modal-title" >Add Image</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    
                                     <div class="mb-3">
-                                        <label class="form-label" >Name</label>
-                                        <input type="text" name="member_name" id="member_name_inp" class="form-control shadow-none" required >
-                                    </div>
-                                    <div class="col-md-12 p-0 mb-3">
                                         <label class="form-label fw-bold">Picture</label>
-                                        <input type="file" name="member_picture" id="member_picture_inp" accept=".jpg, .png, .webp, .jpeg" class="form-control shadow-none" required >
-                                        
-                                </div>
+                                        <input type="file" name="carousel_picture" id="carousel_picture_inp" accept=".jpg, .png, .webp, .jpeg" class="form-control shadow-none" required >
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" onclick="" class="btn text-secondary shadow-none" data-bs-dismiss="modal" >CANCEL</button>
-                                    <button type="submit"   class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                                    <button type="button" onclick="carousel_picture.value=''" class="btn text-secondary shadow-none" data-bs-dismiss="modal" >CANCEL</button>
+                                    <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
                                 </div>
                                 
                             </div>
@@ -76,6 +72,6 @@
     </div>
 
     <?php require('inc/scripts.php'); ?>
-    <script src="script/settings.js"></script>
+    <script src="script/carousel.js"></script>
 </body>
 </html>
