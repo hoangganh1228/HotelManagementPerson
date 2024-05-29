@@ -75,21 +75,53 @@
                             <i class="bi bi-plus-square"></i> Add
                         </button>
                     </div>
-                        <div class="table-respomsive-md" style="height: 350px; overflow-y: scroll;;">
-                            <table class="table table-hover border">
-                                <thead class="sticky-top">
-                                    <tr class="bg-dark text-light">
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Action</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody id="features-data">
-                                    
-                                </tbody>    
-                            </table>
-                        </div>
+                    <div class="table-respomsive-md" style="height: 350px; overflow-y: scroll;;">
+                        <table class="table table-hover border">
+                            <thead>
+                                <tr class="bg-dark text-light">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="features-data">
+                                
+                            </tbody>    
+                        </table>
+                    </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow mb-4" >
+                    <div class="card-body">
+
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h5 class="card-title m-0">Facilities</h5>
+                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
+                            <i class="bi bi-plus-square"></i> Add
+                        </button>
+                    </div>
+                    
+                    <div class="table-respomsive-md" style="height: 350px; overflow-y: scroll;;">
+                        <table class="table table-hover border">
+                            <thead>
+                                <tr class="bg-dark text-light">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Icon</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col" width="40%">Description</th>
+                                    <th scope="col">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="facilities-data">
+                                
+                            </tbody>    
+                        </table>
+                    </div>
                         
                     </div>
                 </div>
@@ -124,10 +156,46 @@
         </div>
     </div> 
 
+    <!-- Facility Modal -->
+    <div class="modal fade" id="facility-s" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="facility_s_form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Add Facility</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label" >Name</label>
+                            <input type="text" name="facility_name" class="form-control shadow-none" required >
+                        </div>
+                        <div class="col-md-12 p-0 mb-3">
+                            <label class="form-label fw-bold">Icon</label>
+                            <input type="file" name="facility_icon" accept=".svg" class="form-control shadow-none" required >
+                            
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="facility_desc" class="form-control shadow-none" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal" >CANCEL</button>
+                        <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+    </div> 
+
+
     <?php require('inc/scripts.php'); ?>
 
     <script>
         let feature_s_form = document.getElementById("feature_s_form");
+        let facility_s_form = document.getElementById("facility_s_form");
         
         feature_s_form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -140,7 +208,7 @@
             data.append('add_feature', '');
 
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "ajax/features_facilities.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+            xhr.open("POST", "ajax/features_facilities.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
             // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.   
             
 
@@ -164,7 +232,7 @@
 
         function get_features() {
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "ajax/features_facilities.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+            xhr.open("POST", "ajax/features_facilities.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
             
 
@@ -177,7 +245,7 @@
 
         function rem_feature(val) {
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "ajax/features_facilities.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+            xhr.open("POST", "ajax/features_facilities.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
 
             xhr.onload = function() {
@@ -198,8 +266,89 @@
 
         }
 
+        facility_s_form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            add_facility();
+        }) 
+
+        function add_facility() {
+            let data = new FormData();
+            data.append('name', facility_s_form.elements['facility_name'].value);
+            data.append('icon', facility_s_form.elements['facility_icon'].files[0]);
+            data.append('desc', facility_s_form.elements['facility_desc'].value);
+            data.append('add_facility', '');
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/features_facilities.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+            // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.   
+            
+
+            xhr.onload = function() {
+                var myModal = document.getElementById('facility-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+
+                modal.hide();
+
+                if(this.responseText == 'inv_img') {
+                    alert('error', 'Only SVG images are allowed!');
+                } else if(this.responseText == 'inv_size') {
+                    alert('error', 'Image should be less than 1 MB!');
+
+                } else if(this.responseText == 'upd_failed') {
+                    alert('error', 'Image upload failed. Server Down!');
+
+                } else {
+                    alert('success', 'New facility added!');
+                    facility_s_form.reset();
+                    get_facilities();
+                }
+            }
+
+            xhr.send(data);
+        }
+
+        function get_facilities() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/features_facilities.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
+            
+
+            xhr.onload = function() {
+                document.getElementById('facilities-data').innerHTML = this.responseText;
+            }
+
+            xhr.send('get_facilities');
+        }
+
+        function rem_facility(val) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/features_facilities.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded') //đặt một tiêu đề HTTP cho yêu cầu. Trong trường hợp này, tiêu đề 'Content-Type' được thiết lập là 'application/x-www-form-urlencoded'. Điều này cho biết dữ liệu gửi đi sẽ được mã hóa dưới dạng x-www-form-urlencoded, là cách thông thường để gửi dữ liệu biểu mẫu qua mạng.
+
+            xhr.onload = function() {
+                if(this.responseText==1) {
+                    alert('success', 'Facility removed!');
+                    get_facilities();
+                } else if(this.responseText == 'room_added') {
+                    alert('error', 'Facility is added in room!');
+                    
+                }
+                else {
+                    alert('error', 'Server down!');
+                }
+            }
+
+            xhr.send('rem_facility='+val);
+
+
+        }
+
+        
+
     window.onload = function() {
         get_features();
+        get_facilities();
+        
     }
 
     </script>
