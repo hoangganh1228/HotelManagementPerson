@@ -30,76 +30,31 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="./Hotel-Booking-Website-Assets/images/facilities/IMG_43553.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
+            
+            <?php
+                $res = selectAll('facilities');
+                $path = FACILITIES_IMG_PATH;
+                
+                while($row = mysqli_fetch_assoc($res)) {
+                    echo<<<data
 
+                    <div class="col-lg-4 col-md-6 mb-5 px-4">
+                        <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="$path$row[icon]" width="40px">
+                                <h5 class="m-0 ms-3">$row[name]</h5>
+                            </div>
+                            <p>
+                                $row[description]
+                            </p>
+                        </div>    
                     </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam culpa, repellat possimus reprehenderit animi ducimus enim.</p>
-                </div>    
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="./Hotel-Booking-Website-Assets/images/facilities/IMG_43553.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
 
-                    </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam culpa, repellat possimus reprehenderit animi ducimus enim.</p>
-                </div>    
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="./Hotel-Booking-Website-Assets/images/facilities/IMG_43553.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
+                    data;
+                }
+            ?>
 
-                    </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam culpa, repellat possimus reprehenderit animi ducimus enim.</p>
-                </div>    
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="./Hotel-Booking-Website-Assets/images/facilities/IMG_43553.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-
-                    </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam culpa, repellat possimus reprehenderit animi ducimus enim.</p>
-                </div>    
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="./Hotel-Booking-Website-Assets/images/facilities/IMG_43553.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-
-                    </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam culpa, repellat possimus reprehenderit animi ducimus enim.</p>
-                </div>    
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="./Hotel-Booking-Website-Assets/images/facilities/IMG_43553.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-
-                    </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam culpa, repellat possimus reprehenderit animi ducimus enim.</p>
-                </div>    
-            </div>
-            <div class="col-lg-4 col-md-6 mb-5 px-4">
-                <div class="bg-white rounded shadow p-4 border-top border-4 border-dark pop">
-                    <div class="d-flex align-items-center mb-2">
-                        <img src="./Hotel-Booking-Website-Assets/images/facilities/IMG_43553.svg" width="40px">
-                        <h5 class="m-0 ms-3">Wifi</h5>
-
-                    </div>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam culpa, repellat possimus reprehenderit animi ducimus enim.</p>
-                </div>    
-            </div>
+            
         </div>
     </div>
 
