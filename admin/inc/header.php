@@ -19,8 +19,11 @@
             </button>
             <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="adminDropdown">
                 <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
+                <li class="nav-item">
                         <a class="nav-link text-white" href="dashboard.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="rooms.php">Rooms</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="features_facilities.php">Features & Facilities</a>

@@ -77,7 +77,7 @@
             <div class="swiper-wrapper mb-5">
                 <?php
                     $about_r = selectAll('team_details');
-
+                    $path = ABOUT_IMG_PATH;
                     while($row = mysqli_fetch_assoc($about_r)) {
                         echo<<<data
 
