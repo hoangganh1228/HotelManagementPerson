@@ -9,12 +9,13 @@
     //     print_r($frm_data);
     // }
 
-    if(isset($_POST['add_room'])) {
+    if (isset($_POST['add_room'])) {
         $features = filteration(json_decode($_POST['features']));
         $facilities = filteration(json_decode($_POST['facilities']));
-
         $frm_data = filteration($_POST);
         $flag = 0;
+    
+        // Chèn dữ liệu vào bảng rooms
         $q1 = "INSERT INTO `rooms` (`name`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $values = [
             $frm_data['name'],
@@ -25,51 +26,56 @@
             $frm_data['children'],
             $frm_data['desc']
         ];
-
-        // Giả sử hàm insert của bạn xử lý các tham số chuẩn bị đúng cách
+    
         if (insert($q1, $values, 'siiiiis')) {
             $flag = 1;
+            $room_id = mysqli_insert_id($con); // Lấy room_id sau khi chèn thành công
+        } else {
+            die('Lỗi khi chèn dữ liệu vào bảng rooms.');
         }
-
-        $room_id = mysqli_insert_id($con);
-
-        $q2 = "INSERT INTO `room_facilities`(`room_id`, `facilities_id`) VALUES ('?, ?')";
-        
-
-        if($stmt = mysqli_prepare($con, $q2)) {
-            foreach($facilities as $f) {
+    
+        if (!$room_id) {
+            die('Không thể lấy room_id sau khi chèn.');
+        }
+    
+        $q2 = "INSERT INTO `room_facilities`(`room_id`, `facilities_id`) VALUES (?, ?)";
+    
+        if ($stmt = mysqli_prepare($con, $q2)) {
+            foreach ($facilities as $f) {
                 mysqli_stmt_bind_param($stmt, 'ii', $room_id, $f);
-                mysqli_stmt_execute($stmt);
+                if (!mysqli_stmt_execute($stmt)) {
+                    $flag = 0;
+                    die('Lỗi khi chèn dữ liệu vào bảng room_facilities: ' . mysqli_stmt_error($stmt));
+                }
             }
-
             mysqli_stmt_close($stmt);
         } else {
             $flag = 0;
-            die('query cannot be prepared - insert');
-        }       
-
-
+            die('Không thể chuẩn bị câu lệnh SQL cho room_facilities.');
+        }
+    
         $q3 = "INSERT INTO `room_features`(`room_id`, `features_id`) VALUES (?, ?)";
-
-        if($stmt = mysqli_prepare($con, $q3)) {
-            foreach($features as $f) {
+    
+        if ($stmt = mysqli_prepare($con, $q3)) {
+            foreach ($features as $f) {
                 mysqli_stmt_bind_param($stmt, 'ii', $room_id, $f);
-                mysqli_stmt_execute($stmt);
+                if (!mysqli_stmt_execute($stmt)) {
+                    $flag = 0;
+                    die('Lỗi khi chèn dữ liệu vào bảng room_features: ' . mysqli_stmt_error($stmt));
+                }
             }
-
             mysqli_stmt_close($stmt);
         } else {
             $flag = 0;
-            die('query cannot be prepared - insert');
-        }  
-
-        if($flag) {
+            die('Không thể chuẩn bị câu lệnh SQL cho room_features.');
+        }
+    
+        if ($flag) {
             echo 1;
         } else {
             echo 0;
         }
-
-    }    
+    }
 
     if(isset($_POST['get_all_rooms'])) {
         $res = select("SELECT * FROM `rooms` WHERE `removed`=?", [0], 'i');
