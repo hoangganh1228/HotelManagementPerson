@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TJ Hotel - HOME</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <?php require('inc/links.php')?>
+    <title><?php echo $settings_r['site_title']?> - HOME</title>
     <style>
         
     </style>
@@ -128,6 +128,13 @@
                     $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
                 }
 
+                $book_btn = "";
+
+                if($settings_r['shutdown']) {
+                    $book_btn = "<a href='#' class='btn btn-sm text-white custom-bg shadow-none'>Book Now</a>";
+                     
+                }
+
                 // print room card 
 
                 echo <<<data
@@ -165,7 +172,7 @@
                                     </span>
                                 </div>
                                 <div class="d-flex justify-content-evenly mb-2">
-                                    <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                                    $book_btn   
                                     <a href="room_details.php?id=$room_data[id]" class="btn btn-sm btn-outline-dark">More details</a>
 
                                 </div>

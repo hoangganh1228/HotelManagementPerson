@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TJ Hotel - ROOMS DETAILS</title>
     <?php require('inc/links.php')?>
+    <title><?php echo $settings_r['site_title']?> - ROOMS DETAILS</title>
 </head>
 <body class="bg-light">
     
@@ -126,12 +126,15 @@
                                 </div>
 
                             area; 
+                            
+                            if(!$settings_r['shutdown']) {
+                                echo<<<book
+                                    
+                                    <a href="#" class="btn w-100 text-white custom-bg shadow-none mb-1">Book Now</a>
+    
+                                book;
+                            }
 
-                            echo<<<book
-                                
-                                <a href="#" class="btn w-100 text-white custom-bg shadow-none mb-1">Book Now</a>
-
-                            book;
 
                         ?>
                     </div>

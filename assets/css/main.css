@@ -51,6 +51,8 @@ input[type=number] {
     position: fixed;
     top: 80px;
     right: 25px; 
+    z-index: 1111;
+
 }
 
 .availability-form {
