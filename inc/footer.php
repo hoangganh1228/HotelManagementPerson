@@ -140,6 +140,86 @@
 
     })
 
+    let login_form = document.getElementById('login-form');
+
+    login_form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        let data = new FormData();
+
+        data.append('email_mob', login_form.elements['email_mob'].value);
+        data.append('pass', login_form.elements['pass'].value);
+        data.append('login', '');
+
+        var myModal = document.getElementById('loginModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/login_register.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+        
+
+        xhr.onload = function() {
+            if(this.responseText == 'inv_email_mob') {
+                alert('error', "Invalid Emailor Mobile Number !")
+            } else if(this.responseText == 'not_verified') {
+                alert('error', "Email is not verified!")
+            } else if(this.responseText == 'inactive') {
+                alert('error', "Account Suspended! Please contact admin")
+            } else if(this.responseText == 'invalid_pass') {
+                alert('error', "Incorect Password!")
+            } 
+            else {
+                window.location = window.location.pathname;
+            }
+        }
+
+        xhr.send(data);
+
+    })
+
+    let forgot_form = document.getElementById('forgot-form');
+
+    forgot_form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        let data = new FormData();
+
+        data.append('email', forgot_form.elements['email'].value);
+        data.append('forgot_pass', '');
+
+        var myModal = document.getElementById('forgotModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/login_register.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+        
+
+        xhr.onload = function() {
+            if(this.responseText == 'inv_email') {
+                alert('error', "Invalid Email !")
+            } else if(this.responseText == 'not_verified') {
+                alert('error', "Email is not verified! Please contact Admin")
+            } else if(this.responseText == 'inactive') {
+                alert('error', "Account Suspended! Please contact admin")
+            } else if(this.responseText == 'mail_failed') {
+                alert('error', "Cannot send email!")
+            } else if(this.responseText == 'upd_failed') {
+                alert('error', "Password reset failed. Server Down!")
+            } 
+            else {
+                alert('success', "Reset link to email!")
+                forgot_form.reset();
+                window.location = window.location.pathname;
+            }
+        }
+
+        xhr.send(data);
+
+    })
+
     setActive();
 
 

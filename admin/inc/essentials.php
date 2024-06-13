@@ -7,6 +7,7 @@
     define('CAROUSEL_IMG_PATH', SITE_URL.'Hotel-Booking-Website-Assets/images/carousel/');
     define('FACILITIES_IMG_PATH', SITE_URL.'Hotel-Booking-Website-Assets/images/facilities/');
     define('ROOMS_IMG_PATH', SITE_URL.'Hotel-Booking-Website-Assets/images/rooms/');
+    define('USERS_IMG_PATH', SITE_URL.'Hotel-Booking-Website-Assets/images/users/');
 
 
     // backend upload process needs this data 
