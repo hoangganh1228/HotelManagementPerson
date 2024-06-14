@@ -70,9 +70,7 @@
                     <div class="card-body">
 
                     <div class="text-end mb-4">
-                        <!-- <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#edit-room">
-                            <i class="bi bi-plus-square"></i> Add
-                        </button> -->
+                        <input type="text" oninput="search_user(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Type to search....">
                     </div>
 
                     <div class="table-responsive" >
@@ -108,7 +106,6 @@
 
 
     <?php require('inc/scripts.php'); ?>
-    
     <script src="script/users.js"></script>                                       
     
 </body>
