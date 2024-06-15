@@ -128,9 +128,13 @@
                             area; 
                             
                             if(!$settings_r['shutdown']) {
+                                $login = 0;
+                                if(isset($_SESSION['login']) && $_SESSION['login'] == true) { 
+                                    $login = 1;
+                                }
                                 echo<<<book
                                     
-                                    <a href="#" class="btn w-100 text-white custom-bg shadow-none mb-1">Book Now</a>
+                                    <button onclick='checkLoginToBook($login, $room_data[id])' class="btn w-100 text-white custom-bg shadow-none mb-1">Book Now</button>
     
                                 book;
                             }
@@ -141,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-7 col-md-12 px-4 bg-dark">
+            <div class="col-lg-7 col-md-12 px-4 ">
                 <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <?php
