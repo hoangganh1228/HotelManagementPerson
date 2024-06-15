@@ -67,7 +67,7 @@
             <div class="col-lg-5 col-md-12 px-4">
                 <div class="card mb-4 border-0 shadow-sm rounded-3" >
                     <div class="card-body">
-                        <form action="#">
+                        <form action="#" id="booking_form">
                             <h6 class="mb-3">BOOKING DETAILS</h6>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -84,11 +84,11 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Check-in</label>
-                                    <input name="checkin" type="date" class="form-control shadow-none" required>
+                                    <input name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none" required>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Check-out</label>
-                                    <input name="checkout" type="date" class="form-control shadow-none" required>
+                                    <input name="checkout" onchange="check_availability()" type="date" class="form-control shadow-none" required>
                                 </div>
                                 <div class="col-12">
                                     <div class="spinner-border text-info mb-3 d-none" id="info_loader" role="status">
@@ -167,53 +167,65 @@
     </div>
 
     <?php require('inc/footer.php')?>
+    <script>
+        let booking_form = document.getElementById('booking_form');
+        let info_loader = document.getElementById('info_loader');
+        let pay_info = document.getElementById('pay_info');
+
+        function check_availability() {
+            let checkin_val = booking_form.elements['checkin'].value;
+            let checkout_val = booking_form.elements['checkout'].value;
+            // booking_form.elements['pay_now'].setAttribute('disabled', true);
+
+            if(checkin_val != '' && checkout_val != '') {
+                pay_info.classList.add('d-none');
+                pay_info.classList.replace('text-dark', 'text-danger');
+                info_loader.classList.remove('d-none');
+
+                let data = new FormData();
+
+                data.append('check_availability', '');
+                data.append('check_in', checkin_val);
+                data.append('check_out', checkout_val);
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "ajax/confirm_booking.crud.php", true); // yêu cầu là một yêu cầu POST (được xác định bằng "POST"). Địa chỉ URL mà yêu cầu sẽ được gửi đến là "ajax/settings_crud.php". Tham số thứ ba là true, nó cho biết yêu cầu là không đồng bộ.
+                
+
+                xhr.onload = function() {
+                    let data = JSON.parse(this.responseText);
+                    
+                    if(data.status == 'check_in_out_equal') {
+                        pay_info.innerText = "You cannot check-out on the same day!"
+                    } else if(data.status == 'check_out_earlier') {
+                        pay_info.innerText = "Check-out date is earlier than check-in date!"
+                    } else if(data.status == 'check_in_earlier') {
+                        pay_info.innerText = "Check-in date is earlier than today's date!"
+                    } else if(data.status == 'unavailable') {
+                        pay_info.innerText = "Room not available for this check-in date!"
+                    } else {
+                        pay_info.innerHTML = "No. of Days " + data.days + "<br>Total Amoount Pay: " + data.payment + " VND"
+                        pay_info.classList.replace('text-danger', 'text-dark');
+
+                    } 
+                    
+                    pay_info.classList.remove('d-none');
+                    info_loader.classList.add('d-none');
+
+                }
+
+                xhr.send(data);
+
+                }
+            }
+
+
+    </script>
 
 
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper(".swiper-container", {
-            spaceBetween: 30,
-            effect: "fade",
-            loop: true,
-            autoplay: {
-                delay: 3500,
-                disableOnInteration: false,
-            }
-        });
-        var swiper = new Swiper(".swiper-testimonials", {
-            effect: "coverflow",
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            slidesPerView: "3",
-            loop: true, 
-            coverflowEffect: {
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-            },
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                },
-                640: {
-                    slidesPerView: 1,
-                },
-                768: {
-                    slidesPerView: 2,
-                },
-                1024: {
-                    slidesPerView: 3    ,
-                },
-            }
-        });
-  </script>
+  
 
 </body>
 </html>
