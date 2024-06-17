@@ -19,6 +19,9 @@
     define('ROOMS_FOLDER', 'rooms/');
     define('USERS_FOLDER', 'users/');
     
+    // Possible ""booking status" values in db = pending, booked, payment failed, cancelled
+    
+    // to configure paytm gate way check file 'project folder / inc / pâytm / config_payatm.php'
 
     function adminLogin() {
         session_start();

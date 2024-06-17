@@ -19,7 +19,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-md-12 mb-lg-0 mb-4 ps-4">
-                <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow ">
                 <div class="container-fluid flex-lg-column align-items-stretch">
                     <h4 class="mt-2">FILTERS</h4>
                     <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#filterDropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,9 +66,11 @@
                         </div>
                     </div>
                 </div>
+                
                 </nav>
+                
             </div>
-
+            <div class="col-lg-9 col-md-12 px-4">
             <?php 
                 $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=?", [1, 0], 'ii');
 
@@ -125,10 +127,9 @@
                     }
 
                     // print room card 
-
+                    
                     echo <<<data
 
-                    <div class="col-lg-9 col-md-12 px-4">
                         <div class="card mb-4 border-0 shadow" >
                             <div class="row g-0 p-3 align-items-center">
                                 <div class="col-md-5 mb-lg-0 mb-3">
@@ -161,7 +162,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                   
 
                     data;
 
